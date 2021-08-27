@@ -1,0 +1,13 @@
+C:\Users\admin\source\repos\NewAddressBook\bin\Debug\netcoreapp3.1\NewAddressBook.exe
+C:\Users\admin\source\repos\NewAddressBook\bin\Debug\netcoreapp3.1\NewAddressBook.deps.json
+C:\Users\admin\source\repos\NewAddressBook\bin\Debug\netcoreapp3.1\NewAddressBook.runtimeconfig.json
+C:\Users\admin\source\repos\NewAddressBook\bin\Debug\netcoreapp3.1\NewAddressBook.runtimeconfig.dev.json
+C:\Users\admin\source\repos\NewAddressBook\bin\Debug\netcoreapp3.1\NewAddressBook.dll
+C:\Users\admin\source\repos\NewAddressBook\bin\Debug\netcoreapp3.1\NewAddressBook.pdb
+C:\Users\admin\source\repos\NewAddressBook\obj\Debug\netcoreapp3.1\NewAddressBook.csproj.AssemblyReference.cache
+C:\Users\admin\source\repos\NewAddressBook\obj\Debug\netcoreapp3.1\NewAddressBook.AssemblyInfoInputs.cache
+C:\Users\admin\source\repos\NewAddressBook\obj\Debug\netcoreapp3.1\NewAddressBook.AssemblyInfo.cs
+C:\Users\admin\source\repos\NewAddressBook\obj\Debug\netcoreapp3.1\NewAddressBook.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\NewAddressBook\obj\Debug\netcoreapp3.1\NewAddressBook.dll
+C:\Users\admin\source\repos\NewAddressBook\obj\Debug\netcoreapp3.1\NewAddressBook.pdb
+C:\Users\admin\source\repos\NewAddressBook\obj\Debug\netcoreapp3.1\NewAddressBook.genruntimeconfig.cache
