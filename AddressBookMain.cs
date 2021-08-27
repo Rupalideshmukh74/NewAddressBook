@@ -39,6 +39,18 @@ namespace NewAddressBook
             ContactList.Add(person);
 
         }
-}
+        public void PrintPerson(Person person)
+        {
+            Console.WriteLine("First Name: " + person.Firstname);
+            Console.WriteLine("Last Name: " + person.Lastname);
+            Console.WriteLine("Address : " + person.Address);
+            Console.WriteLine("City Name : " + person.City);
+            Console.WriteLine("State Name : " + person.State);
+            Console.WriteLine("Zip-Code: " + person.ZipCode);
+            Console.WriteLine("Phone Number: " + person.PhoneNumber);
+            Console.WriteLine("Email - ID : " + person.EmailId);
+            Console.WriteLine("-------------------------------------------");
+        }
+    }
 }
     
