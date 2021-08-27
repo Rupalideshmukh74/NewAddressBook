@@ -38,9 +38,7 @@ namespace NewAddressBook
 
             ContactList.Add(person);
 
-        }
-        public void PrintPerson(Person person)
-        {
+            Console.WriteLine("------------------------------");
             Console.WriteLine("First Name: " + person.Firstname);
             Console.WriteLine("Last Name: " + person.Lastname);
             Console.WriteLine("Address : " + person.Address);
@@ -50,7 +48,15 @@ namespace NewAddressBook
             Console.WriteLine("Phone Number: " + person.PhoneNumber);
             Console.WriteLine("Email - ID : " + person.EmailId);
             Console.WriteLine("-------------------------------------------");
+            Console.ReadLine();
+
+        }
+
+       
+
+        
+ 
+            
         }
     }
-}
-    
+
