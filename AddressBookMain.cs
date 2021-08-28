@@ -12,6 +12,7 @@ namespace NewAddressBook
         Person person = new Person();
 
         Console.WriteLine(" Welcome to Address Book Program \n");
+
             Console.Write("Enter First Name: ");
             person.Firstname = Console.ReadLine();
 
@@ -50,13 +51,33 @@ namespace NewAddressBook
             Console.WriteLine("-------------------------------------------");
             Console.ReadLine();
 
+
+        }
+        public static void DisplayData(Person persn)
+        {
+            Console.WriteLine(" First Name \t: {0} \n Last Name \t: {1} ", persn.Firstname, persn.Lastname);
+            Console.WriteLine(" Address \t: {0} \n City \t\t: {1} ", persn.Address, persn.City);
+            Console.WriteLine(" State \t\t: {0} \n ZipCode \t: {1} ", persn.State, persn.ZipCode);
+            Console.WriteLine(" Phone Number \t: {0} \n EmailId \t: {1} \n", persn.PhoneNumber, persn.EmailId);
+        }
+        public void Book()
+        {
+            Console.WriteLine(" Welcome to Address Book Program \n");
+
+            Console.WriteLine(" [ ADDING CONTACT ] Please provide following details : \n");
+            Display();
+
+            Console.WriteLine("\n Displying saved contact details : \n");
+            foreach (var persn in ContactList)
+            {
+                DisplayData(persn);
+            }
         }
 
-       
 
-        
- 
-            
-        }
+
+
+
+    }
     }
 

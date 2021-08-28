@@ -10,7 +10,10 @@ namespace NewAddressBook
             AddressBookMain ab = new AddressBookMain();
             Person person = new Person();
             ab.Display();
-           
+            ab.Book();
+
+
+
         }
     }
 }
