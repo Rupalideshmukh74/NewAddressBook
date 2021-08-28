@@ -9,7 +9,7 @@ namespace NewAddressBook
             Console.WriteLine("Welcome to Addressbook program!");
             AddressBookMain ab = new AddressBookMain();
             Person person = new Person();
-            ab.Display();
+            
             ab.Book();
 
 

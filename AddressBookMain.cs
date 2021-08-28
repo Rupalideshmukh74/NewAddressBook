@@ -7,77 +7,123 @@ namespace NewAddressBook
     class AddressBookMain
     {
         public static List<Person> ContactList = new List<Person>();
-        public void Display()
-        {
-        Person person = new Person();
 
-        Console.WriteLine(" Welcome to Address Book Program \n");
-
-            Console.Write("Enter First Name: ");
-            person.Firstname = Console.ReadLine();
-
-            Console.Write("Enter Last Name: ");
-            person.Lastname = Console.ReadLine();
-
-            Console.Write("Enter Address: ");
-            person.Address = Console.ReadLine();
-
-            Console.Write("Enter City: ");
-            person.City = Console.ReadLine();
-
-            Console.Write("Enter State: ");
-            person.State = Console.ReadLine();
-
-            Console.Write("Enter ZipCode: ");
-            person.ZipCode = Convert.ToInt32(Console.ReadLine());
-
-            Console.Write("Enter Phone Number: ");
-            person.PhoneNumber = Console.ReadLine();
-
-            Console.Write("Enter EmailId: ");
-            person.EmailId = Console.ReadLine();
-
-            ContactList.Add(person);
-
-            Console.WriteLine("------------------------------");
-            Console.WriteLine("First Name: " + person.Firstname);
-            Console.WriteLine("Last Name: " + person.Lastname);
-            Console.WriteLine("Address : " + person.Address);
-            Console.WriteLine("City Name : " + person.City);
-            Console.WriteLine("State Name : " + person.State);
-            Console.WriteLine("Zip-Code: " + person.ZipCode);
-            Console.WriteLine("Phone Number: " + person.PhoneNumber);
-            Console.WriteLine("Email - ID : " + person.EmailId);
-            Console.WriteLine("-------------------------------------------");
-            Console.ReadLine();
-
-
-        }
-        public static void DisplayData(Person persn)
-        {
-            Console.WriteLine(" First Name \t: {0} \n Last Name \t: {1} ", persn.Firstname, persn.Lastname);
-            Console.WriteLine(" Address \t: {0} \n City \t\t: {1} ", persn.Address, persn.City);
-            Console.WriteLine(" State \t\t: {0} \n ZipCode \t: {1} ", persn.State, persn.ZipCode);
-            Console.WriteLine(" Phone Number \t: {0} \n EmailId \t: {1} \n", persn.PhoneNumber, persn.EmailId);
-        }
+        //starting application
         public void Book()
         {
             Console.WriteLine(" Welcome to Address Book Program \n");
+            Console.WriteLine(" No contacts in address book... \n [ ADD CONTACT ] Please provide following details : \n");
+            AddPersonInfo();
+        }
 
-            Console.WriteLine(" [ ADDING CONTACT ] Please provide following details : \n");
-            Display();
+        //options to select operation
+        public static void Operations()
+        {
+            Console.WriteLine(" Available options : \t 1.Edit_contact\t\t 0.Exit ");
+            Console.Write(" Provide option :  ");
+            int check = int.Parse(Console.ReadLine());
+            switch (check)
+            {
+                case 1:
+                    Console.Write(" Enter Firstname to find and edit info : ");
+                    string findName = Console.ReadLine();
+                    foreach (var entry in ContactList)
+                    {
+                        if (entry.Firstname.ToLower() == findName.ToLower())
+                        {
+                            ModifyPersonInfo();
+                            DisplayContacts();
+                        }
+                        else
+                        {
+                            Console.WriteLine(" Firstname does not match. Please retry. \n");
+                            Operations();
+                        }
+                    }
+                    Operations();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // add contact method
+        public static void AddPersonInfo()
+        {
+            Person persn = new Person();
+            
+            persn.EmailId = Console.ReadLine();
+
+            ContactList.Add(persn);
+            DisplayContacts();
+            Operations();
+        }
+        public static void ModifyPersonInfo()
+        {
+            Console.WriteLine("\n [ EDIT CONTACT ] Select Field to edit -\n 1:First_name  2:Last_name  3:Address  4:City  5:State  6.Zipcode  7:Phone_Number  8.EmailId ");
+            Console.WriteLine(" Type 0 to Exit Edit option. ");
+            Console.Write(" Please provide an option : ");
+            int choice = int.Parse(Console.ReadLine());
+
+            foreach (var persn in ContactList)
+            {
+                switch (choice)
+                {
+                    case 1:
+                        Console.Write(" Modify FirstName : ");
+                        persn.Firstname = Console.ReadLine();
+                        return;
+                    case 2:
+                        Console.Write(" Modify LastName : ");
+                        persn.Lastname = Console.ReadLine();
+                        return;
+                    case 3:
+                        Console.Write(" Modify AddressLine : ");
+                        persn.Address = Console.ReadLine();
+                        return;
+                    case 4:
+                        Console.Write(" Modify City : ");
+                        persn.City = Console.ReadLine();
+                        return;
+                    case 5:
+                        Console.Write(" Modify State : ");
+                        persn.State = Console.ReadLine();
+                        return;
+                    case 6:
+                        Console.Write(" Modify ZipCode : ");
+                        persn.ZipCode = int.Parse(Console.ReadLine());
+                        return;
+                    case 7:
+                        Console.Write(" Modify PhoneNumber : ");
+                        persn.PhoneNumber = Console.ReadLine();
+                        return;
+                    case 8:
+                        Console.Write(" Modify EmailId : ");
+                        persn.EmailId = Console.ReadLine();
+                        return;
+                    case 0:
+                        break;
+                    default:
+                        Console.WriteLine(" Invalid value entered.");
+                        break;
+                }
+            }
+        }
+
+        //display saved Contacts
+        public static void DisplayContacts()
+        {
+            static void DisplayFormat(Person persn)
+            {
+                Console.WriteLine(" First Name \t: {0} \n Last Name \t: {1} ", persn.Firstname, persn.Lastname);
+                Console.WriteLine(" Address \t: {0} \n City \t\t: {1} ", persn.Address, persn.City);
+                Console.WriteLine(" State \t\t: {0} \n ZipCode \t: {1} ", persn.State, persn.ZipCode);
+                Console.WriteLine(" Phone Number \t: {0} \n EmailId \t: {1} \n", persn.PhoneNumber, persn.EmailId);
+            }
 
             Console.WriteLine("\n Displying saved contact details : \n");
             foreach (var persn in ContactList)
             {
-                DisplayData(persn);
+                DisplayFormat(persn);
             }
-        }
-
-
-
-
-
-    }
-    }
-
+        } } }
