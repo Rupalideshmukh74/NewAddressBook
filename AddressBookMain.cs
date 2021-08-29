@@ -8,7 +8,15 @@ namespace NewAddressBook
     {
         public static List<Person> ContactList = new List<Person>();
 
-        //starting application
+        
+
+        public static void DisplayData(Person persn)
+        {
+            Console.WriteLine(" First Name \t: {0} \n Last Name \t: {1} ", persn.FirstName, persn.LastName);
+            Console.WriteLine(" Address \t: {0} \n City \t\t: {1} ", persn.Address, persn.City);
+            Console.WriteLine(" State \t\t: {0} \n ZipCode \t: {1} ", persn.State, persn.ZipCode);
+            Console.WriteLine(" Phone Number \t: {0} \n EmailId \t: {1} \n", persn.PhoneNumber, persn.EmailId);
+        }
         public void Book()
         {
             Console.WriteLine(" Welcome to Address Book Program \n");
@@ -29,7 +37,7 @@ namespace NewAddressBook
                     string findName = Console.ReadLine();
                     foreach (var entry in ContactList)
                     {
-                        if (entry.Firstname.ToLower() == findName.ToLower())
+                        if (entry.FirstName.ToLower() == findName.ToLower())
                         {
                             ModifyPersonInfo();
                             DisplayContacts();
@@ -51,79 +59,83 @@ namespace NewAddressBook
         public static void AddPersonInfo()
         {
             Person persn = new Person();
-            
+	
             persn.EmailId = Console.ReadLine();
 
             ContactList.Add(persn);
             DisplayContacts();
-            Operations();
-        }
-        public static void ModifyPersonInfo()
+        Operations();
+    }
+
+    //edit contact method
+    public static void ModifyPersonInfo()
+    {
+        Console.WriteLine("\n [ EDIT CONTACT ] Select Field to edit -\n 1:First_name  2:Last_name  3:Address  4:City  5:State  6.Zipcode  7:Phone_Number  8.EmailId ");
+        Console.WriteLine(" Type 0 to Exit Edit option. ");
+        Console.Write(" Please provide an option : ");
+        int choice = int.Parse(Console.ReadLine());
+
+        foreach (var persn in ContactList)
         {
-            Console.WriteLine("\n [ EDIT CONTACT ] Select Field to edit -\n 1:First_name  2:Last_name  3:Address  4:City  5:State  6.Zipcode  7:Phone_Number  8.EmailId ");
-            Console.WriteLine(" Type 0 to Exit Edit option. ");
-            Console.Write(" Please provide an option : ");
-            int choice = int.Parse(Console.ReadLine());
-
-            foreach (var persn in ContactList)
+            switch (choice)
             {
-                switch (choice)
-                {
-                    case 1:
-                        Console.Write(" Modify FirstName : ");
-                        persn.Firstname = Console.ReadLine();
-                        return;
-                    case 2:
-                        Console.Write(" Modify LastName : ");
-                        persn.Lastname = Console.ReadLine();
-                        return;
-                    case 3:
-                        Console.Write(" Modify AddressLine : ");
-                        persn.Address = Console.ReadLine();
-                        return;
-                    case 4:
-                        Console.Write(" Modify City : ");
-                        persn.City = Console.ReadLine();
-                        return;
-                    case 5:
-                        Console.Write(" Modify State : ");
-                        persn.State = Console.ReadLine();
-                        return;
-                    case 6:
-                        Console.Write(" Modify ZipCode : ");
-                        persn.ZipCode = int.Parse(Console.ReadLine());
-                        return;
-                    case 7:
-                        Console.Write(" Modify PhoneNumber : ");
-                        persn.PhoneNumber = Console.ReadLine();
-                        return;
-                    case 8:
-                        Console.Write(" Modify EmailId : ");
-                        persn.EmailId = Console.ReadLine();
-                        return;
-                    case 0:
-                        break;
-                    default:
-                        Console.WriteLine(" Invalid value entered.");
-                        break;
-                }
+                case 1:
+                    Console.Write(" Modify FirstName : ");
+                    persn.FirstName = Console.ReadLine();
+                    return;
+                case 2:
+                    Console.Write(" Modify LastName : ");
+                    persn.LastName = Console.ReadLine();
+                    return;
+                case 3:
+                    Console.Write(" Modify AddressLine : ");
+                    persn.Address = Console.ReadLine();
+                    return;
+                case 4:
+                    Console.Write(" Modify City : ");
+                    persn.City = Console.ReadLine();
+                    return;
+                case 5:
+                    Console.Write(" Modify State : ");
+                    persn.State = Console.ReadLine();
+                    return;
+                case 6:
+                    Console.Write(" Modify ZipCode : ");
+                    persn.ZipCode = int.Parse(Console.ReadLine());
+                    return;
+                case 7:
+                    Console.Write(" Modify PhoneNumber : ");
+                    persn.PhoneNumber = Console.ReadLine();
+                    return;
+                case 8:
+                    Console.Write(" Modify EmailId : ");
+                    persn.EmailId = Console.ReadLine();
+                    return;
+                case 0:
+                    break;
+                default:
+                    Console.WriteLine(" Invalid value entered.");
+                    break;
             }
         }
+    }
 
-        //display saved Contacts
-        public static void DisplayContacts()
+    //display saved Contacts
+    public static void DisplayContacts()
+    {
+        static void DisplayFormat(Person persn)
         {
-            static void DisplayFormat(Person persn)
-            {
-                Console.WriteLine(" First Name \t: {0} \n Last Name \t: {1} ", persn.Firstname, persn.Lastname);
-                Console.WriteLine(" Address \t: {0} \n City \t\t: {1} ", persn.Address, persn.City);
-                Console.WriteLine(" State \t\t: {0} \n ZipCode \t: {1} ", persn.State, persn.ZipCode);
-                Console.WriteLine(" Phone Number \t: {0} \n EmailId \t: {1} \n", persn.PhoneNumber, persn.EmailId);
-            }
+            Console.WriteLine(" First Name \t: {0} \n Last Name \t: {1} ", persn.FirstName, persn.LastName);
+            Console.WriteLine(" Address \t: {0} \n City \t\t: {1} ", persn.Address, persn.City);
+            Console.WriteLine(" State \t\t: {0} \n ZipCode \t: {1} ", persn.State, persn.ZipCode);
+            Console.WriteLine(" Phone Number \t: {0} \n EmailId \t: {1} \n", persn.PhoneNumber, persn.EmailId);
+        }
 
-            Console.WriteLine("\n Displying saved contact details : \n");
-            foreach (var persn in ContactList)
-            {
-                DisplayFormat(persn);
-            }
-        } } }
+        Console.WriteLine("\n Displying saved contact details : \n");
+        foreach (var persn in ContactList)
+        {
+            DisplayFormat(persn);
+        }
+    }
+}
+}
