@@ -4,7 +4,7 @@ namespace NewAddressBook
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Addressbook program!");
             AddressBookMain ab = new AddressBookMain();
