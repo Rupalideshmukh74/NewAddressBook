@@ -1,27 +1,27 @@
-﻿using System;
+﻿using NewAddressBook;
+
+
+using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
 using System.Linq;
-namespace NewAddressBook
+using System.Text;
+namespace AddressBook
 {
     class AddressBookMain
     {
-        //list for storing objects for person class
-        public List<Person> ContactList;
+        //Dictionary for storing objects for person class        
         public static Dictionary<string, List<Person>> contactsDictionary = new Dictionary<string, List<Person>>();
         public static string adrBookName;
-
-        public AddressBookMain()
-        {
-            this.ContactList = new List<Person>();
-        }
 
         //starting application
         public void Book()
         {
+            Console.WriteLine("Welcome to Address Book Program \n");
+            Console.WriteLine("Please provide following details : ");
             NewAdrBook();
         }
-
 
         //new address book / dictionary
         public static void NewAdrBook()
@@ -29,7 +29,6 @@ namespace NewAddressBook
             Console.Write("Creating a new AddressBook. " + "\nPlease Enter Name : ");
             adrBookName = Console.ReadLine();
             Console.WriteLine("---------------------------------------------------------");
-
             if (contactsDictionary.ContainsKey(adrBookName))
             {
                 Console.WriteLine(" This name already exists.. Please add new name..");
@@ -48,6 +47,15 @@ namespace NewAddressBook
             }
 
         }
+        //display all address books names
+        public static void DisplayABList()
+        {
+            Console.Write("\n Here are available address books : ");
+            foreach (var ab in AddressBookMain.contactsDictionary)
+            {
+                Console.Write("\t" + ab.Key);
+            }
+        }
 
         // add contact method
         public static void AddPersonInfo(string adrBookName)
@@ -60,41 +68,29 @@ namespace NewAddressBook
 
             Console.Write("\nEnter First Name : ");
             persn.FirstName = Console.ReadLine();
-
             // UC7: search duplicate entry of first name
             DuplicateNameCheck(persn.FirstName);
-
             Console.Write("Enter Last Name : ");
             persn.LastName = Console.ReadLine();
-
             Console.Write("Enter Address/landmark : ");
             persn.Address = Console.ReadLine();
-
             Console.Write("Enter City : ");
             persn.City = Console.ReadLine();
-
             Console.Write("Enter State : ");
             persn.State = Console.ReadLine();
-
             Console.Write("Enter PinCode : ");
             persn.ZipCode = Convert.ToInt32(Console.ReadLine());
-
             Console.Write("Enter Phone Number (+91) : ");
             persn.PhoneNumber = Console.ReadLine();
-
             Console.Write("Enter EmailId : ");
             persn.EmailId = Console.ReadLine();
-
             contactsDictionary[adrBookName].Add(persn);
             ContactManager.Operations();
-
         }
-
         static void DuplicateNameCheck(string searchName)
         {
             Console.Write(" --> Checking existing first names : ");
             bool isPresent = contactsDictionary.Values.SelectMany(contact => contact).Any(adrBookName => adrBookName.FirstName.ToUpper().Equals(searchName.ToUpper()));
-
             if (isPresent)
             {
                 Console.Write(" This name already exists. Please add different one.\n");
@@ -105,7 +101,6 @@ namespace NewAddressBook
                 Console.WriteLine(" No duplicate Entry");
             }
         }
-
         //edit contact method
         public static void ModifyPersonInfo(string adrBookName, string findName)
         {
@@ -120,7 +115,6 @@ namespace NewAddressBook
                         Console.WriteLine(" Type 0 to Exit Edit operation. ");
                         Console.Write(" Please provide an option : ");
                         int choice = int.Parse(Console.ReadLine());
-
                         switch (choice)
                         {
                             case 1:
@@ -164,10 +158,7 @@ namespace NewAddressBook
                     }
                 }
             }
-
         }
-
-
         //delete selected contact
         public static void DeletePersonInfo(string adrBookName, string findName)
         {
@@ -175,7 +166,6 @@ namespace NewAddressBook
             {
                 Console.WriteLine("\n Working on address book : " + adrBookName);
                 int deleted = 0;
-
                 if (contactsDictionary[adrBookName].Count > 0)
                 {
                     foreach (Person contact in contactsDictionary[adrBookName])
@@ -203,11 +193,9 @@ namespace NewAddressBook
                 Console.WriteLine(" address book not found.");
             }
         }
-
         //display saved Contacts
         public static void DisplayContacts(string adrBookName)
         {
-
             if (contactsDictionary[adrBookName].Count > 0)
             {
                 Console.WriteLine(" Displaying contacts in addresss book : " + adrBookName);
@@ -231,7 +219,6 @@ namespace NewAddressBook
             string cityState = Console.ReadLine();
             int dataNotFound = 1;
             Console.WriteLine(" Displaying person name and location details containing : " + cityState);
-
             foreach (var ab in contactsDictionary)
             {
                 foreach (Person person in contactsDictionary[ab.Key])
@@ -249,7 +236,6 @@ namespace NewAddressBook
             {
                 Console.WriteLine(" Your input does not match any of the contact in address book.");
             }
-
         }
         //View Person by City or state
         public static void DisplayByCityState()
@@ -257,7 +243,6 @@ namespace NewAddressBook
             //Declaring Dictionary
             Dictionary<string, List<Person>> personInCity = new Dictionary<string, List<Person>>();
             Dictionary<string, List<Person>> personInState = new Dictionary<string, List<Person>>();
-
             //Display Messages
             Console.WriteLine(" Displying person details By City or state \n");
             Console.Write(" Enter city name : ");
@@ -265,7 +250,6 @@ namespace NewAddressBook
             //Read City Name
             string cityName = Console.ReadLine();
             personInCity[cityName] = new List<Person>();
-
             //read State Name
             Console.Write(" Enter State name : ");
             string stateName = Console.ReadLine();
@@ -280,31 +264,53 @@ namespace NewAddressBook
                     {
                         personInCity[cityName].Add(person);
                     }
-
                     if (person.State.ToUpper().Equals(stateName.ToUpper()))
                     {
                         personInState[stateName].Add(person);
                     }
+                    else
+                    {
+                        Console.WriteLine(" City/State not found.");
+                    }
                 }
             }
 
-            //Display
-            Console.WriteLine("\n - - -  City : {0}  - - - ", cityName);
-            foreach (var data in personInCity[cityName])
+            Console.WriteLine("\n Options : 1.View persons by city/state \t 2.Get count of person by city/state \n");
+            Console.Write(" Your choice : ");
+            int option = int.Parse(Console.ReadLine());
+            if (option == 1)
             {
-                Console.Write(" First Name : {0} \t Last Name : {1} ", data.FirstName, data.LastName);
-                Console.Write(" \tCity \t: {0} \t State \t: {1} \n", data.City, data.State);
-            }
+                Console.WriteLine(" - - - - - - View Person by city and state - - - - - - ");
+                Console.WriteLine("\n - - -  City : {0}  - - - ", cityName);
+                foreach (var data in personInCity[cityName])
+                {
+                    Console.Write(" First Name : {0} \t Last Name : {1} ", data.FirstName, data.LastName);
+                    Console.Write(" \tCity \t: {0} \t State \t: {1} \n", data.City, data.State);
+                }
 
-            Console.WriteLine("\n\n - - -  State : {0}  - - - ", stateName);
-            foreach (var data in personInState[stateName])
+                Console.WriteLine("\n\n - - -  State : {0}  - - - ", stateName);
+                foreach (var data in personInState[stateName])
+                {
+                    Console.Write(" First Name : {0} \t Last Name : {1} ", data.FirstName, data.LastName);
+                    Console.Write(" \tCity \t: {0} \t State \t: {1} \n", data.City, data.State);
+                }
+            }
+            else
             {
-                Console.Write(" First Name : {0} \t Last Name : {1} ", data.FirstName, data.LastName);
-                Console.Write(" \tCity \t: {0} \t State \t: {1} \n", data.City, data.State);
+                Console.WriteLine(" - - - - - - Count of persons by city and state - - - - - - ");
+
+                Console.Write("\n City : {0} \t Number of person : {1} | ", cityName, personInCity[cityName].Count);
+                foreach (var data in personInCity[cityName])
+                {
+                    Console.Write(" {0} {1} ,", data.FirstName, data.LastName);
+                }
+
+                Console.Write("\n State : {0} \t Number of person : {1} | ", stateName, personInState[stateName].Count);
+                foreach (var data in personInState[stateName])
+                {
+                    Console.Write(" {0} {1} ,", data.FirstName, data.LastName);
+                }
             }
         }
-
     }
 }
-
-    
